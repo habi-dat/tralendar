@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  app:
+    image: habidat/tralendar
+    build:
+      context: ./
+      target: production
+      dockerfile: Dockerfile
+    environment:
+      - SIMPLYBOOK_USER=${SIMPLYBOOK_USER}
+      - SIMPLYBOOK_PASSWORD=${SIMPLYBOOK_PASSWORD}
+    ports:
+      - "3000"
