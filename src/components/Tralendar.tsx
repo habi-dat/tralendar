@@ -28,7 +28,10 @@ export const Tralendar = ({ events }: Props): JSX.Element => {
         dayHeaderFormat={{ weekday: "short", day: "numeric", month: "short" }}
         slotLabelFormat={{ hour12: false, hour: "2-digit", minute: "2-digit" }}
         slotDuration="01:00"
+        slotMinTime="06:00"
+        slotMaxTime="24:00"
         locale="en"
+        height="600px"
       />
     </div>
   );

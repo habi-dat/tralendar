@@ -31,6 +31,8 @@ type Booking = {
   start_date: string;
   end_date: string;
   event: string;
+  event_category: string | null;
+  invoice_id: string;
 };
 
 type AdminApiService = {
@@ -39,6 +41,18 @@ type AdminApiService = {
     date_to: string;
     is_confirmed?: number;
   }) => Booking[];
+};
+
+const getColor = (category: string) => {
+  let color;
+  if (category === "1") {
+    color = "#dc0504";
+  } else if (category === "2") {
+    color = "#239c63";
+  } else if (category === "3") {
+    color = undefined;
+  }
+  return color;
 };
 
 export const getData = unstable_cache(async (): Promise<EventSourceInput> => {
@@ -69,16 +83,18 @@ export const getData = unstable_cache(async (): Promise<EventSourceInput> => {
     });
 
     const eventList = await apiService.getBookings({
-      date_from: moment().subtract(1, "month").format("YYYY-MM-DD"),
+      date_from: moment().subtract(10, "month").format("YYYY-MM-DD"),
       date_to: moment().add(6, "months").format("YYYY-MM-DD"),
       is_confirmed: 1,
     });
 
-    const mapped = eventList.map((event) => ({
+    const mapped: EventSourceInput = eventList.map((event) => ({
       id: event.id,
       title: event.event,
       start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
       end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
+      backgroundColor: getColor(event.event_category || "1"),
+      borderColor: getColor(event.event_category || "1"),
     }));
 
     return mapped;
