@@ -52,50 +52,54 @@ const getColor = (category: string) => {
   return color;
 };
 
-export const getData = unstable_cache(async (): Promise<EventSourceInput> => {
-  //const res = await fetch("https://api.example.com/...");
-  // The return value is *not* serialized
-  // You can return Date, Map, Set, etc.
+export const getData = unstable_cache(
+  async (): Promise<EventSourceInput> => {
+    //const res = await fetch("https://api.example.com/...");
+    // The return value is *not* serialized
+    // You can return Date, Map, Set, etc.
 
-  /*  if (!res.ok) {
+    /*  if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   } */
 
-  const loginService = rpcClient<LoginService>(
-    "https://user-api.simplybook.me/login"
-  );
-  if (process.env.SIMPLYBOOK_USER && process.env.SIMPLYBOOK_PASSWORD) {
-    const token = await loginService.getUserToken(
-      "circustrap",
-      process.env.SIMPLYBOOK_USER || "",
-      process.env.SIMPLYBOOK_PASSWORD || ""
+    const loginService = rpcClient<LoginService>(
+      "https://user-api.simplybook.me/login"
     );
+    if (process.env.SIMPLYBOOK_USER && process.env.SIMPLYBOOK_PASSWORD) {
+      const token = await loginService.getUserToken(
+        "circustrap",
+        process.env.SIMPLYBOOK_USER || "",
+        process.env.SIMPLYBOOK_PASSWORD || ""
+      );
 
-    const apiService = rpcClient<AdminApiService>({
-      url: "https://user-api.simplybook.me/admin",
-      getHeaders() {
-        return { "X-Company-Login": "circustrap", "X-User-Token": token };
-      },
-    });
+      const apiService = rpcClient<AdminApiService>({
+        url: "https://user-api.simplybook.me/admin",
+        getHeaders() {
+          return { "X-Company-Login": "circustrap", "X-User-Token": token };
+        },
+      });
 
-    const eventList = await apiService.getBookings({
-      date_from: moment().subtract(10, "month").format("YYYY-MM-DD"),
-      date_to: moment().add(6, "months").format("YYYY-MM-DD"),
-    });
+      const eventList = await apiService.getBookings({
+        date_from: moment().subtract(10, "month").format("YYYY-MM-DD"),
+        date_to: moment().add(6, "months").format("YYYY-MM-DD"),
+      });
 
-    const mapped: EventSourceInput = eventList
-      .filter((event) => event.is_confirm === "1")
-      .map((event) => ({
-        id: event.id,
-        title: event.event,
-        start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
-        end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
-        backgroundColor: getColor(event.event_category || "1"),
-        borderColor: getColor(event.event_category || "1"),
-      }));
+      const mapped: EventSourceInput = eventList
+        .filter((event) => event.is_confirm === "1")
+        .map((event) => ({
+          id: event.id,
+          title: event.event,
+          start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
+          end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
+          backgroundColor: getColor(event.event_category || "1"),
+          borderColor: getColor(event.event_category || "1"),
+        }));
 
-    return mapped;
-  }
-  return [];
-});
+      return mapped;
+    }
+    return [];
+  },
+  [],
+  { revalidate: 60 }
+);
