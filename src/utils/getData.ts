@@ -33,14 +33,11 @@ type Booking = {
   event: string;
   event_category: string | null;
   invoice_id: string;
+  is_confirm: string;
 };
 
 type AdminApiService = {
-  getBookings: (options: {
-    date_from: string;
-    date_to: string;
-    is_confirmed?: number;
-  }) => Booking[];
+  getBookings: (options: { date_from: string; date_to: string }) => Booking[];
 };
 
 const getColor = (category: string) => {
@@ -85,17 +82,18 @@ export const getData = unstable_cache(async (): Promise<EventSourceInput> => {
     const eventList = await apiService.getBookings({
       date_from: moment().subtract(10, "month").format("YYYY-MM-DD"),
       date_to: moment().add(6, "months").format("YYYY-MM-DD"),
-      is_confirmed: 1,
     });
 
-    const mapped: EventSourceInput = eventList.map((event) => ({
-      id: event.id,
-      title: event.event,
-      start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
-      end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
-      backgroundColor: getColor(event.event_category || "1"),
-      borderColor: getColor(event.event_category || "1"),
-    }));
+    const mapped: EventSourceInput = eventList
+      .filter((event) => event.is_confirm === "1")
+      .map((event) => ({
+        id: event.id,
+        title: event.event,
+        start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
+        end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
+        backgroundColor: getColor(event.event_category || "1"),
+        borderColor: getColor(event.event_category || "1"),
+      }));
 
     return mapped;
   }
