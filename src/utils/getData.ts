@@ -1,4 +1,4 @@
-import { EventSourceInput } from "@fullcalendar/core";
+import type { EventSourceInput } from "@fullcalendar/core";
 import moment from "moment";
 import { unstable_cache } from "next/cache";
 import { rpcClient } from "typed-rpc";
@@ -12,16 +12,16 @@ type LoginService = {
   getUserToken: (
     companLogin: string,
     username: string,
-    password: string
+    password: string,
   ) => string;
 };
 
 type PublicApiService = {
   getEventList: (
-    isVisibleOnly: Boolean,
-    asArray: Boolean,
+    isVisibleOnly: boolean,
+    asArray: boolean,
     handleClasses: number | null,
-    searchString: string | null
+    searchString: string | null,
   ) => unknown;
 };
 
@@ -41,7 +41,7 @@ type AdminApiService = {
 };
 
 const getColor = (category: string) => {
-  let color;
+  let color: string | undefined;
   if (category === "4" || category === "6" || category === "1") {
     color = "#dc0504"; // red
   } else if (category === "2") {
@@ -64,13 +64,13 @@ export const getData = unstable_cache(
   } */
 
     const loginService = rpcClient<LoginService>(
-      "https://user-api.simplybook.me/login"
+      "https://user-api.simplybook.me/login",
     );
     if (process.env.SIMPLYBOOK_USER && process.env.SIMPLYBOOK_PASSWORD) {
       const token = await loginService.getUserToken(
         "circustrap",
         process.env.SIMPLYBOOK_USER || "",
-        process.env.SIMPLYBOOK_PASSWORD || ""
+        process.env.SIMPLYBOOK_PASSWORD || "",
       );
 
       const apiService = rpcClient<AdminApiService>({
@@ -106,5 +106,5 @@ export const getData = unstable_cache(
     return [];
   },
   [],
-  { revalidate: 60 }
+  { revalidate: 60 },
 );

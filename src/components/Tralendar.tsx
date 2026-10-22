@@ -1,16 +1,16 @@
 "use client";
-import React from "react";
-import FullCalendar from "@fullcalendar/react";
-import { EventSourceInput } from "@fullcalendar/core";
-import timeGridPlugin from "@fullcalendar/timegrid"; // a plugin!
 import bootstrap5Plugin from "@fullcalendar/bootstrap5";
+import type { EventSourceInput } from "@fullcalendar/core";
+import FullCalendar from "@fullcalendar/react";
+import timeGridPlugin from "@fullcalendar/timegrid"; // a plugin!
 import moment from "moment";
+import type React from "react";
 
 type Props = {
   events: EventSourceInput;
 };
 
-export const Tralendar = ({ events }: Props): JSX.Element => {
+export const Tralendar = ({ events }: Props): React.JSX.Element => {
   return (
     <div>
       <FullCalendar
