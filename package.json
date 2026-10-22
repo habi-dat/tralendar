@@ -26,5 +26,6 @@
     "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.6.1",
     "typescript": "^6"
-  }
+  },
+  "packageManager": "pnpm@12.15.0"
 }
