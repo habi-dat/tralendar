@@ -40,16 +40,12 @@ type AdminApiService = {
   getBookings: (options: { date_from: string; date_to: string }) => Booking[];
 };
 
-const getColor = (category: string) => {
-  let color: string | undefined;
+const getClassName = (category: string) => {
   if (category === "4" || category === "6" || category === "1") {
-    color = "#dc0504"; // red
-  } else if (category === "2") {
-    color = "#239c63"; // green
-  } else if (category === "3") {
-    color = undefined; // blue
+    return "event-red";
   }
-  return color;
+  if (category === "2") return "event-green";
+  return "event-blue";
 };
 
 export const getData = unstable_cache(
@@ -97,8 +93,7 @@ export const getData = unstable_cache(
               : event.event,
           start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
           end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
-          backgroundColor: getColor(event.event_category || "1"),
-          borderColor: getColor(event.event_category || "1"),
+          classNames: [getClassName(event.event_category || "1")],
         }));
 
       return mapped;

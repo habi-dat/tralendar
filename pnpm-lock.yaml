@@ -7,9 +7,6 @@ settings:
 importers:
   .:
     dependencies:
-      "@fullcalendar/bootstrap5":
-        specifier: ^6.1.22
-        version: 6.1.22(@fullcalendar/core@6.1.22)
       "@fullcalendar/core":
         specifier: ^6.1.22
         version: 6.1.22
@@ -19,12 +16,6 @@ importers:
       "@fullcalendar/timegrid":
         specifier: ^6.1.22
         version: 6.1.22(@fullcalendar/core@6.1.22)
-      bootstrap:
-        specifier: ^5.3.8
-        version: 5.3.8(@popperjs/core@2.11.8)
-      bootstrap-icons:
-        specifier: ^1.13.2
-        version: 1.13.2
       moment:
         specifier: ^2.31.0
         version: 2.31.0
@@ -164,14 +155,6 @@ packages:
       {
         integrity: sha512-Xz4Tpyki7XyrpbUK1jR1AhdAdaXyhhY4lZ3neLodmhpuWfy2PAQN5B46sAiU4liOXGLkHypn/qU+jvfWSCYYLA==,
       }
-
-  "@fullcalendar/bootstrap5@6.1.22":
-    resolution:
-      {
-        integrity: sha512-78KVCIPvFLBBaY/APV5YPsSC+7l65Cg1SPHO/mYkalGibKZ9hJrAgOAYO7JmTKf97RiYbx3i17cwFoLvIK8ugA==,
-      }
-    peerDependencies:
-      "@fullcalendar/core": ~6.1.22
 
   "@fullcalendar/core@6.1.22":
     resolution:
@@ -510,12 +493,6 @@ packages:
     cpu: [x64]
     os: [win32]
 
-  "@popperjs/core@2.11.8":
-    resolution:
-      {
-        integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==,
-      }
-
   "@swc/helpers@0.5.23":
     resolution:
       {
@@ -559,20 +536,6 @@ packages:
       }
     engines: { node: ">=6.0.0" }
     hasBin: true
-
-  bootstrap-icons@1.13.2:
-    resolution:
-      {
-        integrity: sha512-fAU1Ly3dH7hwRg+CB8EZ0Vl0fF80zgXHeUVJyfUOKzoURr+TbwISbCW5tKUoQLERaWYG2emTCybcPbD96hdD1A==,
-      }
-
-  bootstrap@5.3.8:
-    resolution:
-      {
-        integrity: sha512-HP1SZDqaLDPwsNiqRqi5NcP0SSXciX2s9E+RyqJIIqGo+vJeN5AJVM98CXmW/Wux0nQ5L7jeWUdplCEf0Ee+tg==,
-      }
-    peerDependencies:
-      "@popperjs/core": ^2.11.8
 
   browserslist@4.29.4:
     resolution:
@@ -844,10 +807,6 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  "@fullcalendar/bootstrap5@6.1.22(@fullcalendar/core@6.1.22)":
-    dependencies:
-      "@fullcalendar/core": 6.1.22
-
   "@fullcalendar/core@6.1.22":
     dependencies:
       preact: 10.12.1
@@ -1000,8 +959,6 @@ snapshots:
   "@next/swc-win32-x64-msvc@16.4.2":
     optional: true
 
-  "@popperjs/core@2.11.8": {}
-
   "@swc/helpers@0.5.23":
     dependencies:
       tslib: 2.8.1
@@ -1028,12 +985,6 @@ snapshots:
       postcss-value-parser: 4.2.0
 
   baseline-browser-mapping@2.11.30: {}
-
-  bootstrap-icons@1.13.2: {}
-
-  bootstrap@5.3.8(@popperjs/core@2.11.8):
-    dependencies:
-      "@popperjs/core": 2.11.8
 
   browserslist@4.29.4:
     dependencies:

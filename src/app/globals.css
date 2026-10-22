@@ -1,0 +1,210 @@
+:root {
+  --trap-accent: #c8925a;
+  --trap-accent-dark: #a9733d;
+  --trap-purple: #b94fd1;
+  --trap-text: #3a3340;
+  --trap-muted: #8a8391;
+  --trap-line: #ece8ef;
+
+  --event-red: #d94a3d;
+  --event-green: #2e9d6b;
+  --event-blue: #3d7fd6;
+}
+
+html,
+body {
+  margin: 0;
+  background: #fff;
+  color: var(--trap-text);
+}
+
+.tralendar {
+  padding: 12px 16px 16px;
+  box-sizing: border-box;
+  height: 100vh;
+
+  --fc-border-color: var(--trap-line);
+  --fc-today-bg-color: rgba(185, 79, 209, 0.05);
+  --fc-now-indicator-color: var(--trap-purple);
+  --fc-event-text-color: #fff;
+  --fc-button-bg-color: #fff;
+  --fc-button-border-color: var(--trap-line);
+  --fc-button-text-color: var(--trap-text);
+  --fc-button-hover-bg-color: #faf6f1;
+  --fc-button-hover-border-color: var(--trap-accent);
+  --fc-button-active-bg-color: var(--trap-accent);
+  --fc-button-active-border-color: var(--trap-accent);
+}
+
+/* Toolbar */
+.tralendar .fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 12px;
+}
+
+.tralendar .fc .fc-toolbar-title {
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.tralendar .fc .fc-button {
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4em 0.8em;
+  box-shadow: none;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s,
+    color 0.15s;
+}
+
+.tralendar .fc .fc-button:focus,
+.tralendar .fc .fc-button:focus-visible {
+  box-shadow: 0 0 0 3px rgba(200, 146, 90, 0.3);
+}
+
+.tralendar .fc .fc-today-button {
+  background: var(--trap-accent);
+  border-color: var(--trap-accent);
+  color: #fff;
+}
+
+.tralendar .fc .fc-today-button:hover:not(:disabled) {
+  background: var(--trap-accent-dark);
+  border-color: var(--trap-accent-dark);
+  color: #fff;
+}
+
+.tralendar .fc .fc-today-button:disabled {
+  opacity: 0.5;
+}
+
+.tralendar .fc .fc-button-group > .fc-button:hover {
+  color: var(--trap-accent-dark);
+}
+
+/* Grid */
+.tralendar .fc-theme-standard .fc-scrollgrid {
+  border: none;
+}
+
+.tralendar .fc-theme-standard th {
+  border-left-color: transparent;
+  border-right-color: transparent;
+}
+
+.tralendar .fc .fc-timegrid-slot-minor {
+  border-top-style: none;
+}
+
+.tralendar .fc .fc-timegrid-slot-label {
+  border: none;
+  vertical-align: top;
+}
+
+.tralendar .fc .fc-timegrid-slot-label-cushion {
+  font-size: 0.75rem;
+  color: var(--trap-muted);
+  transform: translateY(-0.65em);
+  background: #fff;
+  padding: 0 6px 0 0;
+}
+
+/* Day headers */
+.tralendar .fc .fc-col-header-cell-cushion {
+  padding: 6px 0 8px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.tralendar .day-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.1;
+}
+
+.tralendar .day-header .weekday {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--trap-muted);
+}
+
+.tralendar .day-header .day {
+  margin-top: 4px;
+  font-size: 1.25rem;
+  font-weight: 500;
+  width: 2em;
+  height: 2em;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.tralendar .day-header.today .weekday {
+  color: var(--trap-purple);
+}
+
+.tralendar .day-header.today .day {
+  background: var(--trap-purple);
+  color: #fff;
+}
+
+/* Events */
+.tralendar .fc .fc-timegrid-event {
+  border: none;
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 1.5px #fff,
+    0 1px 2px rgba(0, 0, 0, 0.12);
+  font-size: 0.75rem;
+  overflow: hidden;
+}
+
+.tralendar .fc .fc-timegrid-event .fc-event-main {
+  padding: 4px 6px;
+}
+
+.tralendar .fc .fc-event-time {
+  font-size: 0.7rem;
+  opacity: 0.85;
+  margin-bottom: 2px;
+}
+
+.tralendar .fc .fc-event-title {
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.tralendar .fc .event-red {
+  background: var(--event-red);
+}
+
+.tralendar .fc .event-green {
+  background: var(--event-green);
+}
+
+.tralendar .fc .event-blue {
+  background: var(--event-blue);
+}
+
+.tralendar .fc .fc-timegrid-event:hover {
+  filter: brightness(1.06);
+}
+
+@media (max-width: 600px) {
+  .tralendar {
+    padding: 8px;
+  }
+
+  .tralendar .fc .fc-toolbar-title {
+    font-size: 1.05rem;
+  }
+
+  .tralendar .day-header .day {
+    font-size: 1rem;
+  }
+}
