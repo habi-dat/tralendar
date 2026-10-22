@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t habidat/tralendar --target=production .
+docker build -t habidat/tralendar --target=production --pull .

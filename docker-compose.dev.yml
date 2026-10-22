@@ -13,5 +13,6 @@ services:
     environment:
       - SIMPLYBOOK_USER=${SIMPLYBOOK_USER}
       - SIMPLYBOOK_PASSWORD=${SIMPLYBOOK_PASSWORD}
+    command: pnpm dev
     ports:
       - "3000:3000"

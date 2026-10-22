@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@fullcalendar/bootstrap5':
     specifier: ^6.1.9
@@ -37,10 +41,10 @@ dependencies:
 
 devDependencies:
   '@types/node':
-    specifier: ^20
+    specifier: ^20.0.0
     version: 20.0.0
   '@types/react':
-    specifier: ^18
+    specifier: ^18.0.0
     version: 18.0.0
   '@types/react-dom':
     specifier: ^18
@@ -55,7 +59,7 @@ devDependencies:
     specifier: 14.0.1
     version: 14.0.1(eslint@8.0.0)(typescript@5.0.2)
   typescript:
-    specifier: ^5
+    specifier: ^5.0.2
     version: 5.0.2
 
 packages:

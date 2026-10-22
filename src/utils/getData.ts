@@ -1,8 +1,7 @@
-import moment from "moment";
-import { rpcClient } from "typed-rpc";
-
 import { EventSourceInput } from "@fullcalendar/core";
+import moment from "moment";
 import { unstable_cache } from "next/cache";
+import { rpcClient } from "typed-rpc";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 60;
@@ -34,6 +33,7 @@ type Booking = {
   event_category: string | null;
   invoice_id: string;
   is_confirm: string;
+  client: string;
 };
 
 type AdminApiService = {
@@ -42,12 +42,12 @@ type AdminApiService = {
 
 const getColor = (category: string) => {
   let color;
-  if (category === "1") {
-    color = "#dc0504";
+  if (category === "4" || category === "6" || category === "1") {
+    color = "#dc0504"; // red
   } else if (category === "2") {
-    color = "#239c63";
+    color = "#239c63"; // green
   } else if (category === "3") {
-    color = undefined;
+    color = undefined; // blue
   }
   return color;
 };
@@ -82,14 +82,19 @@ export const getData = unstable_cache(
 
       const eventList = await apiService.getBookings({
         date_from: moment().subtract(10, "month").format("YYYY-MM-DD"),
-        date_to: moment().add(6, "months").format("YYYY-MM-DD"),
+        date_to: moment().add(12, "months").format("YYYY-MM-DD"),
       });
+
+      console.log(eventList);
 
       const mapped: EventSourceInput = eventList
         .filter((event) => event.is_confirm === "1")
         .map((event) => ({
           id: event.id,
-          title: event.event,
+          title:
+            event.client === "Reserved for Open Training"
+              ? `${event.event} reserved for Open Training`
+              : event.event,
           start: moment(event.start_date).format("YYYY-MM-DDTHH:mm:ss"),
           end: moment(event.end_date).format("YYYY-MM-DDTHH:mm:ss"),
           backgroundColor: getColor(event.event_category || "1"),
